@@ -9,5 +9,9 @@
 import UIKit
 
 class NetworkLayer: NSObject {
-
+    fileprivate var twilioClient: TwilioClientProtocol
+    
+    init(twilioClient: TwilioClientProtocol) {
+        self.twilioClient = twilioClient
+    }
 }

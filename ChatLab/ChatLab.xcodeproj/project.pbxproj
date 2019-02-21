@@ -23,6 +23,7 @@
 		CC4E04FF221E5C65008916CE /* SwinjectStoryboard+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4E04FE221E5C65008916CE /* SwinjectStoryboard+Extensions.swift */; };
 		CC4E0501221E5CC0008916CE /* ModelLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4E0500221E5CC0008916CE /* ModelLayer.swift */; };
 		CC4E0504221E5E18008916CE /* TwilioClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4E0503221E5E18008916CE /* TwilioClient.swift */; };
+		CC4E0507221E6575008916CE /* TransitionLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4E0506221E6575008916CE /* TransitionLayer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +69,7 @@
 		CC4E04FE221E5C65008916CE /* SwinjectStoryboard+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwinjectStoryboard+Extensions.swift"; sourceTree = "<group>"; };
 		CC4E0500221E5CC0008916CE /* ModelLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelLayer.swift; sourceTree = "<group>"; };
 		CC4E0503221E5E18008916CE /* TwilioClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwilioClient.swift; sourceTree = "<group>"; };
+		CC4E0506221E6575008916CE /* TransitionLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionLayer.swift; sourceTree = "<group>"; };
 		D723FB5685756F0B9DEAE4C8 /* Pods-ChatLabTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatLabTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChatLabTests/Pods-ChatLabTests.release.xcconfig"; sourceTree = "<group>"; };
 		DB7370A3107DCB48E40E38FD /* Pods-ChatLabUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatLabUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChatLabUITests/Pods-ChatLabUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		E54C474546924B74CA3E13EC /* Pods_ChatLabUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChatLabUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -179,6 +181,7 @@
 		CC4E04F2221E53C8008916CE /* Interactors */ = {
 			isa = PBXGroup;
 			children = (
+				CC4E0505221E654A008916CE /* Transition */,
 				CC4E0502221E5CE3008916CE /* Network */,
 				CC4E0500221E5CC0008916CE /* ModelLayer.swift */,
 			);
@@ -235,6 +238,14 @@
 				CC4E0503221E5E18008916CE /* TwilioClient.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		CC4E0505221E654A008916CE /* Transition */ = {
+			isa = PBXGroup;
+			children = (
+				CC4E0506221E6575008916CE /* TransitionLayer.swift */,
+			);
+			path = Transition;
 			sourceTree = "<group>";
 		};
 		FDEE0EA512F7D5B8EC5E1FFD /* Frameworks */ = {
@@ -496,6 +507,7 @@
 				CC4E0504221E5E18008916CE /* TwilioClient.swift in Sources */,
 				CC4E04FF221E5C65008916CE /* SwinjectStoryboard+Extensions.swift in Sources */,
 				CC4E04F9221E5A7B008916CE /* RootNavigationCoordinator.swift in Sources */,
+				CC4E0507221E6575008916CE /* TransitionLayer.swift in Sources */,
 				CC4E04C4221E2468008916CE /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
