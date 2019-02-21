@@ -1,0 +1,52 @@
+PODS:
+  - Alamofire (4.4.0)
+  - Differentiator (3.1.0)
+  - RxCocoa (4.3.1):
+    - RxSwift (~> 4.0)
+  - RxDataSources (3.1.0):
+    - Differentiator (~> 3.0)
+    - RxCocoa (~> 4.0)
+    - RxSwift (~> 4.0)
+  - RxSwift (4.3.1)
+  - SwiftyJSON (4.2.0)
+  - Swinject (2.5.0)
+  - SwinjectStoryboard (2.1.0):
+    - Swinject (~> 2.5)
+  - TwilioChatClient (2.2.0)
+
+DEPENDENCIES:
+  - Alamofire (= 4.4.0)
+  - RxCocoa (~> 4.0)
+  - RxDataSources (~> 3.0)
+  - RxSwift (~> 4.0)
+  - SwiftyJSON
+  - Swinject
+  - SwinjectStoryboard
+  - TwilioChatClient (= 2.2.0)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Alamofire
+    - Differentiator
+    - RxCocoa
+    - RxDataSources
+    - RxSwift
+    - SwiftyJSON
+    - Swinject
+    - SwinjectStoryboard
+    - TwilioChatClient
+
+SPEC CHECKSUMS:
+  Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
+  Differentiator: be49ca3408f0ecfc761e4c7763d20c62be01b9ad
+  RxCocoa: 78763c7b07d02455598d9fc3c1ad091a28b73635
+  RxDataSources: a843bad90c29817f5923ec8163f4af2de084ceb3
+  RxSwift: fe0fd770a43acdb7d0a53da411c9b892e69bb6e4
+  SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
+  Swinject: 82cdb851f63f91bba974e3eca1d69780f2f7677e
+  SwinjectStoryboard: 688f096033103e66ffcf6ca678211acd7d7be505
+  TwilioChatClient: eca6db5972be042593890b55641699545d73d3af
+
+PODFILE CHECKSUM: 3e218279084a2c4dceae2e135e143379d124a9ba
+
+COCOAPODS: 1.5.3
