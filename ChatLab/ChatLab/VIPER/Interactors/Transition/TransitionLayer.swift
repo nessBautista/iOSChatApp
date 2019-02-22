@@ -6,8 +6,14 @@
 //  Copyright © 2019 Nestor Hernandez. All rights reserved.
 //
 
+//MARK:- NOTES
+/* This Struct will provide utility methods for appropiate Data Format.
+ It will Help the communication between layers
+ */
 import UIKit
-
-class TransitionLayer: NSObject {
+protocol TransitionLayerProtocol {
+    
+}
+struct TransitionLayer:  TransitionLayerProtocol {
 
 }
