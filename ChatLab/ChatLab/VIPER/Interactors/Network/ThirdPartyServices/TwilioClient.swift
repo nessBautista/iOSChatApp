@@ -22,6 +22,8 @@ protocol TwilioClientProtocol {
     
     //*********  SDK chat client ********* //
     var client: TwilioChatClient? {get set}
+    var generalChannel: TCHChannel? {get set}
+    var messages: [TCHMessage]  {get set}
     
     func getToken(tokenRequest: TwilioLoginInfo, completion: @escaping BlockStringResponse)
     func startChatClient(token: String, completion: @escaping BlockBooleanResponse)
@@ -58,6 +60,10 @@ protocol TwilioClientProtocol {
 
 //MARK:- TwilioClient REST API Implementation
 class TwilioClient: NSObject, TwilioClientProtocol {
+    var generalChannel: TCHChannel?
+    
+    var messages: [TCHMessage]
+    
     var client: TwilioChatClient?
     
     deinit {
@@ -66,6 +72,9 @@ class TwilioClient: NSObject, TwilioClientProtocol {
     override init() {
         print("TwilioClient initialization")
         self.client = nil
+        self.generalChannel = nil
+        self.messages = []
+        
     }
 }
 
