@@ -11,7 +11,7 @@ target 'ChatLab' do
 
   # Pods for ChatLab
   pod 'TwilioChatClient', '2.2.0'
-  pod 'Alamofire', '4.4.0'
+  pod 'Alamofire'
   pod 'SwiftyJSON'
   pod 'Swinject'
   pod 'SwinjectStoryboard'

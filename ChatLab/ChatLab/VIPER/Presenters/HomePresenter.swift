@@ -8,7 +8,7 @@
 
 import UIKit
 
-typealias BlockAsyncBooleanResult = (AsycnResult)->()
+
 protocol HomePresenterProtocol {
     func requestAccessAsGuest(result: @escaping BlockAsyncBooleanResult)
 }
@@ -27,10 +27,7 @@ class HomePresenter: HomePresenterProtocol {
 
 //MARK:- Login Functions
 extension HomePresenter {
-    func requestAccessAsGuest(result: @escaping BlockAsyncBooleanResult){
-        
-        modelLayer.getToken(for: "Ness") { (tokenResult) in
-            result(tokenResult)
-        }
+    func requestAccessAsGuest(result: @escaping BlockAsyncBooleanResult){        
+        modelLayer.doTwilioLogin(with: "Ness")
     }
 }

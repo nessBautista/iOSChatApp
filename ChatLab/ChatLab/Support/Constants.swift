@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import SwiftyJSON
 
 
 //MARK:- Navigation Enums
@@ -22,11 +22,25 @@ enum RegistrationState {
          error
 }
 
+//MARK:- Network layer
+
+typealias BlockAsyncBooleanResult = (AsycnResult)->()
+
+typealias BlockNetworkResponse = (_ response:Any?, _ error: NetworkLayerError?)->()
+typealias BlockStringResponse = (_ response:String?, _ error: NetworkLayerError?)->()
+typealias BlockJsonResponse = (_ jsonData: JSON?, _ error: NetworkLayerError?)->()
+typealias BlockBooleanResponse = (_ response: Bool?, _ error: NetworkLayerError?)->()
+
 enum AsycnResult: String {
     case success,
          error
 }
 
+enum NetworkLayerError: Error {
+    case canceledRequest
+    case httpError(code: Int)
+    case badRequest
+}
 
 struct Constants {
     struct BaseURL {

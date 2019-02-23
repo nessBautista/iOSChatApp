@@ -1,5 +1,5 @@
 PODS:
-  - Alamofire (4.4.0)
+  - Alamofire (4.7.3)
   - Differentiator (3.1.0)
   - RxCocoa (4.3.1):
     - RxSwift (~> 4.0)
@@ -15,7 +15,7 @@ PODS:
   - TwilioChatClient (2.2.0)
 
 DEPENDENCIES:
-  - Alamofire (= 4.4.0)
+  - Alamofire
   - RxCocoa (~> 4.0)
   - RxDataSources (~> 3.0)
   - RxSwift (~> 4.0)
@@ -37,7 +37,7 @@ SPEC REPOS:
     - TwilioChatClient
 
 SPEC CHECKSUMS:
-  Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
+  Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
   Differentiator: be49ca3408f0ecfc761e4c7763d20c62be01b9ad
   RxCocoa: 78763c7b07d02455598d9fc3c1ad091a28b73635
   RxDataSources: a843bad90c29817f5923ec8163f4af2de084ceb3
@@ -47,6 +47,6 @@ SPEC CHECKSUMS:
   SwinjectStoryboard: 688f096033103e66ffcf6ca678211acd7d7be505
   TwilioChatClient: eca6db5972be042593890b55641699545d73d3af
 
-PODFILE CHECKSUM: 3e218279084a2c4dceae2e135e143379d124a9ba
+PODFILE CHECKSUM: 4d4bfa41b2b9f23c08e2aa943b29e8bf8fea6d53
 
 COCOAPODS: 1.5.3

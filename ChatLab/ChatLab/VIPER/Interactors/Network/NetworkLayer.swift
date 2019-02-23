@@ -8,8 +8,8 @@
 
 import UIKit
 
-protocol NetworkLayerProtocol {
-    func getAccessToken(for userId:String, onComplete: @escaping (_ token: String?, _ identity: String?, _ error: Error?) -> Void)
+protocol NetworkLayerProtocol {    
+    func twilioLogin(with User: String)
 }
 class NetworkLayer: NetworkLayerProtocol {
     fileprivate var twilioClient: TwilioClientProtocol
@@ -26,10 +26,18 @@ class NetworkLayer: NetworkLayerProtocol {
 //MARK:- Login Functions
 extension NetworkLayer {
     
-    func getAccessToken(for userId:String, onComplete: @escaping (_ token: String?, _ identity: String?, _ error: Error?) -> Void) {
-        twilioClient.doChatLogin(for: userId) { (token, identity, error) in
-            onComplete(token, identity, error)
+
+    
+    func twilioLogin(with userIdentity: String) {
+        twilioClient.getToken(tokenRequest: TwilioLoginInfo(identity: userIdentity)) { [weak self] (token, error) in
+            guard error == nil else {return}
+            if let accesstoken = token {
+                print(accesstoken)
+                self?.twilioClient.startChatClient(token: accesstoken, completion: { (response, error) in
+                    print("success")
+                })
+                
+            }
         }
-        
     }
 }

@@ -32,9 +32,7 @@ class NavigationCoordinator: NavigationCoordinatorProtocol {
         case .channelList:
             break
         case .chat:
-            break
-        default:
-            break
+            break        
         }
     }
     

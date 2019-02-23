@@ -13,7 +13,7 @@
 
 import UIKit
 import TwilioChatClient
-
+import SwiftyJSON
 
 
 
@@ -23,7 +23,9 @@ protocol TwilioClientProtocol {
     //*********  SDK chat client ********* //
     var client: TwilioChatClient? {get set}
     
-    func doChatLogin(for userId:String, completion: @escaping (_ token: String?, _ identity: String?, _ error: Error?) -> Void)
+    func getToken(tokenRequest: TwilioLoginInfo, completion: @escaping BlockStringResponse)
+    func startChatClient(token: String, completion: @escaping BlockBooleanResponse)
+    
     //********* TWILIO REST API  ********* //
     //--- CHANNELS
     //[https://www.twilio.com/docs/chat/rest/channels]
@@ -65,38 +67,69 @@ class TwilioClient: NSObject, TwilioClientProtocol {
         print("TwilioClient initialization")
         self.client = nil
     }
-    
-    
-    
 }
 
 //MARK:- TwilioChatClient SDK Implementation
 extension TwilioClient: TwilioChatClientDelegate {
     
-    //Login
-    func doChatLogin(for userId:String, completion: @escaping (_ token:String?, _ identity: String?, _ error:Error?) -> Void) {
+    func getToken(tokenRequest: TwilioLoginInfo, completion: @escaping BlockStringResponse) {
         
-        let deviceId = UIDevice.current.identifierForVendor!.uuidString
-        let urlString = "\(Constants.BaseURL.chat)?identity=\(userId)&device=\(deviceId)"
-        
-        TokenUtils.retrieveToken(url: urlString) { (token, identity, error) in
-            if let token = token {
-                // Set up Twilio Chat client
-                TwilioChatClient.chatClient(withToken: token, properties: nil, delegate: self) {
-                    (result, chatClient) in
-                    self.client = chatClient;
-                    // Update UI on main thread
-                    DispatchQueue.main.async() {
-                        print("Logged in as \"\(identity ?? String())\"")
-                    }
-                    completion(token, identity, error)
-                }
-            } else {
-                print("Error retrieving token: \(error.debugDescription)")
-                completion(String(), String(), error)
-            }
-            
+        AlamofirePort().twilioRequest(service: Constants.BaseURL.chat,
+                                      methodType: .get,
+                                      params: tokenRequest.getRequest()) { (responseData, error) in
+                                       
+                                        guard error == nil else {completion(nil, error) ;return}
+                                        if let data = responseData {
+                                            let token = (JSON(data)["token"].string)
+                                           completion(token, nil)
+                                        }
+                                        
         }
+    }
+    
+    func startChatClient(token: String, completion: @escaping BlockBooleanResponse) {
+        TwilioChatClient.chatClient(withToken: token, properties: nil, delegate: self) {
+            (result, chatClient) in
+            if result.isSuccessful() == true {
+                self.client = chatClient;
+                print("Logged in")
+                completion(true, nil)
+            }
+            completion(false, .badRequest)
+    }
+   
+    
+        
+//        let deviceId = UIDevice.current.identifierForVendor!.uuidString
+//        let urlString = "\(Constants.BaseURL.chat)?identity=\(userId)&device=\(deviceId)"
+//
+//        TokenUtils.retrieveToken(url: urlString) { (token, identity, error) in
+//            if let token = token {
+//                // Set up Twilio Chat client
+//                TwilioChatClient.chatClient(withToken: token, properties: nil, delegate: self) {
+//                    (result, chatClient) in
+//                    self.client = chatClient;
+//                    // Update UI on main thread
+//                    DispatchQueue.main.async() {
+//                        print("Logged in as \"\(identity ?? String())\"")
+//                    }
+//                    completion(token, identity, error)
+//                }
+//            } else {
+//                print("Error retrieving token: \(error.debugDescription)")
+//                completion(String(), String(), error)
+//            }
+//
+//        }
+//        AlamofirePort().testRequest { (json, error) in
+//            if let netError = error {
+//                print(netError)
+//            }
+//            if let jsonValue = json {
+//                print(JSON(jsonValue))
+//            }
+//        }
+        
     }
     
     func chatClient(_ client: TwilioChatClient, synchronizationStatusUpdated status: TCHClientSynchronizationStatus) {
@@ -104,34 +137,6 @@ extension TwilioClient: TwilioChatClientDelegate {
     }
     
     func chatClient(_ client: TwilioChatClient, channel: TCHChannel, messageAdded message: TCHMessage) {
-        
-    }
-}
-
-
-struct TokenUtils {
-    
-    static func retrieveToken(url: String, completion: @escaping (String?, String?, Error?) -> Void) {
-        if let requestURL = URL(string: url) {
-            let session = URLSession(configuration: URLSessionConfiguration.default)
-            let task = session.dataTask(with: requestURL, completionHandler: { (data, response, error) in
-                if let data = data {
-                    do {
-                        let json = try JSONSerialization.jsonObject(with: data, options: []) as! [String:String]
-                        let token = json["token"]
-                        let identity = json["identity"]
-                        completion(token, identity, error)
-                    }
-                    catch let error as NSError {
-                        completion(nil, nil, error)
-                    }
-                    
-                } else {
-                    completion(nil, nil, error)
-                }
-            })
-            task.resume()
-        }
         
     }
 }
