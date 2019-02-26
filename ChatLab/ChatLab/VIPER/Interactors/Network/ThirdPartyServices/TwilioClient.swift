@@ -24,6 +24,7 @@ protocol TwilioClientProtocol {
     var client: TwilioChatClient? {get set}
     var generalChannel: TCHChannel? {get set}
     var messages: [TCHMessage]  {get set}
+    var channelList:TCHChannels? {get set}
     
     func getToken(tokenRequest: TwilioLoginInfo, completion: @escaping BlockStringResponse)
     func startChatClient(token: String, completion: @escaping BlockBooleanResponse)
@@ -60,21 +61,27 @@ protocol TwilioClientProtocol {
 
 //MARK:- TwilioClient REST API Implementation
 class TwilioClient: NSObject, TwilioClientProtocol {
+    
     var generalChannel: TCHChannel?
-    
     var messages: [TCHMessage]
-    
     var client: TwilioChatClient?
+    var channelList: TCHChannels? {
+        didSet{
+            let channels = channelList?.subscribedChannels().map({TwilioChannel(channelName: $0.friendlyName ?? String())})
+            onChannelListUpdated?(channels ?? [])
+        }
+    }
     
+    var onChannelListUpdated:((_ channels: [TwilioChannel])->())?
     deinit {
         print("TwilioClient deinit")
     }
     override init() {
         print("TwilioClient initialization")
+        self.onChannelListUpdated = nil
         self.client = nil
         self.generalChannel = nil
         self.messages = []
-        
     }
 }
 
@@ -92,7 +99,6 @@ extension TwilioClient: TwilioChatClientDelegate {
                                             let token = (JSON(data)["token"].string)
                                            completion(token, nil)
                                         }
-                                        
         }
     }
     
@@ -105,47 +111,31 @@ extension TwilioClient: TwilioChatClientDelegate {
                 completion(true, nil)
             }
             completion(false, .badRequest)
+        }
     }
-   
     
-        
-//        let deviceId = UIDevice.current.identifierForVendor!.uuidString
-//        let urlString = "\(Constants.BaseURL.chat)?identity=\(userId)&device=\(deviceId)"
-//
-//        TokenUtils.retrieveToken(url: urlString) { (token, identity, error) in
-//            if let token = token {
-//                // Set up Twilio Chat client
-//                TwilioChatClient.chatClient(withToken: token, properties: nil, delegate: self) {
-//                    (result, chatClient) in
-//                    self.client = chatClient;
-//                    // Update UI on main thread
-//                    DispatchQueue.main.async() {
-//                        print("Logged in as \"\(identity ?? String())\"")
-//                    }
-//                    completion(token, identity, error)
-//                }
-//            } else {
-//                print("Error retrieving token: \(error.debugDescription)")
-//                completion(String(), String(), error)
-//            }
-//
-//        }
-//        AlamofirePort().testRequest { (json, error) in
-//            if let netError = error {
-//                print(netError)
-//            }
-//            if let jsonValue = json {
-//                print(JSON(jsonValue))
-//            }
-//        }
-        
-    }
     
     func chatClient(_ client: TwilioChatClient, synchronizationStatusUpdated status: TCHClientSynchronizationStatus) {
-        
+        if status == .completed {
+            if let channelList = self.client?.channelsList(){
+                self.channelList = channelList
+            }
+        }
+        if status == .channelsListCompleted {
+                        
+        }
     }
     
     func chatClient(_ client: TwilioChatClient, channel: TCHChannel, messageAdded message: TCHMessage) {
         
     }
+    
+    func onChannelListAvailable(channelList: TCHChannels){
+        
+    }
+    //CHd4baaf4a12a841d2a6a1e3e561acc5c8
+    //MARK:- Utilities
+    func joinChannel(_ channelUniqueName: String){
+        
+    }       
 }

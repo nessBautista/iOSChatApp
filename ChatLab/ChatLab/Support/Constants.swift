@@ -30,6 +30,8 @@ typealias BlockNetworkResponse = (_ response:Any?, _ error: NetworkLayerError?)-
 typealias BlockStringResponse = (_ response:String?, _ error: NetworkLayerError?)->()
 typealias BlockJsonResponse = (_ jsonData: JSON?, _ error: NetworkLayerError?)->()
 typealias BlockBooleanResponse = (_ response: Bool?, _ error: NetworkLayerError?)->()
+//typealias BlockTwilioChannelResponse = (_ channel: TCHChannel?, )
+
 
 enum AsycnResult: String {
     case success,
@@ -43,6 +45,8 @@ enum NetworkLayerError: Error {
 }
 
 struct Constants {
+    static let defaultChannel = "general"
+    
     struct BaseURL {
         static let base = "https://chat.twilio.com/v2"
         static let chat = "https://blush-bombay-7408.twil.io/chat-token"

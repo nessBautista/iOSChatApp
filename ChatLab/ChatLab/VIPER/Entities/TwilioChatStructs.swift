@@ -28,3 +28,6 @@ struct TwilioLoginInfo {
     }
 }
 
+struct TwilioChannel {
+    var channelName: String 
+}

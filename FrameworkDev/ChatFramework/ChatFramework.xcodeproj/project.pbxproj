@@ -10,6 +10,7 @@
 		CCD74E812221D23D00DE4C23 /* ChatFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCD74E772221D23D00DE4C23 /* ChatFramework.framework */; };
 		CCD74E862221D23D00DE4C23 /* ChatFrameworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD74E852221D23D00DE4C23 /* ChatFrameworkTests.swift */; };
 		CCD74E882221D23D00DE4C23 /* ChatFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = CCD74E7A2221D23D00DE4C23 /* ChatFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CCD74EB62221D7F200DE4C23 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD74EB52221D7F200DE4C23 /* ChatViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +30,7 @@
 		CCD74E802221D23D00DE4C23 /* ChatFrameworkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChatFrameworkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCD74E852221D23D00DE4C23 /* ChatFrameworkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatFrameworkTests.swift; sourceTree = "<group>"; };
 		CCD74E872221D23D00DE4C23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CCD74EB52221D7F200DE4C23 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 			isa = PBXGroup;
 			children = (
 				CCD74E7A2221D23D00DE4C23 /* ChatFramework.h */,
+				CCD74EB52221D7F200DE4C23 /* ChatViewController.swift */,
 				CCD74E7B2221D23D00DE4C23 /* Info.plist */,
 			);
 			path = ChatFramework;
@@ -148,6 +151,7 @@
 				TargetAttributes = {
 					CCD74E762221D23D00DE4C23 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1010;
 					};
 					CCD74E7F2221D23D00DE4C23 = {
 						CreatedOnToolsVersion = 10.1;
@@ -194,6 +198,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCD74EB62221D7F200DE4C23 /* ChatViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,6 +346,7 @@
 		CCD74E8C2221D23D00DE4C23 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -358,6 +364,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = AppLab.ChatFramework;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -366,6 +373,7 @@
 		CCD74E8D2221D23D00DE4C23 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -391,6 +399,7 @@
 		CCD74E8F2221D23D00DE4C23 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GQGZN6D9K9;
 				INFOPLIST_FILE = ChatFrameworkTests/Info.plist;
@@ -409,6 +418,7 @@
 		CCD74E902221D23D00DE4C23 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GQGZN6D9K9;
 				INFOPLIST_FILE = ChatFrameworkTests/Info.plist;

@@ -26,8 +26,6 @@ class NetworkLayer: NetworkLayerProtocol {
 //MARK:- Login Functions
 extension NetworkLayer {
     
-
-    
     func twilioLogin(with userIdentity: String) {
         twilioClient.getToken(tokenRequest: TwilioLoginInfo(identity: userIdentity)) { [weak self] (token, error) in
             guard error == nil else {return}
@@ -36,8 +34,7 @@ extension NetworkLayer {
                 self?.twilioClient.startChatClient(token: accesstoken, completion: { (response, error) in
                     print("success")
                 })
-                
             }
         }
-    }
+    }        
 }
