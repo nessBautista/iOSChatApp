@@ -10,6 +10,10 @@
 		07F4EE3682211A235F2DADEC /* Pods_ChatLabTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C10A32583B41051C42B5013F /* Pods_ChatLabTests.framework */; };
 		23665C2C0C60EA5A925ED124 /* Pods_ChatLab.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D11BF83CDCD026F3003441D /* Pods_ChatLab.framework */; };
 		AB67D0C585E800E23CB95F92 /* Pods_ChatLabUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E54C474546924B74CA3E13EC /* Pods_ChatLabUITests.framework */; };
+		CC4400D3222F0D6E003255BE /* GoogleCloudClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4400D2222F0D6E003255BE /* GoogleCloudClient.swift */; };
+		CC4400D7222F5425003255BE /* NewChannelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4400D5222F5425003255BE /* NewChannelViewController.swift */; };
+		CC4400D8222F5425003255BE /* NewChannelViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC4400D6222F5425003255BE /* NewChannelViewController.xib */; };
+		CC4400DA222F7018003255BE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CC4400D9222F7018003255BE /* GoogleService-Info.plist */; };
 		CC4E04C4221E2468008916CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4E04C3221E2468008916CE /* AppDelegate.swift */; };
 		CC4E04C9221E2468008916CE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC4E04C7221E2468008916CE /* Main.storyboard */; };
 		CC4E04CB221E246A008916CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC4E04CA221E246A008916CE /* Assets.xcassets */; };
@@ -57,6 +61,10 @@
 		A7B7686BBA8CF5B8502CBD90 /* Pods-ChatLab.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatLab.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChatLab/Pods-ChatLab.debug.xcconfig"; sourceTree = "<group>"; };
 		BD4CF6121A1D65E4538D51E7 /* Pods-ChatLabUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatLabUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChatLabUITests/Pods-ChatLabUITests.release.xcconfig"; sourceTree = "<group>"; };
 		C10A32583B41051C42B5013F /* Pods_ChatLabTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChatLabTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CC4400D2222F0D6E003255BE /* GoogleCloudClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleCloudClient.swift; sourceTree = "<group>"; };
+		CC4400D5222F5425003255BE /* NewChannelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewChannelViewController.swift; sourceTree = "<group>"; };
+		CC4400D6222F5425003255BE /* NewChannelViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewChannelViewController.xib; sourceTree = "<group>"; };
+		CC4400D9222F7018003255BE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CC4E04C0221E2468008916CE /* ChatLab.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatLab.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC4E04C3221E2468008916CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CC4E04C8221E2468008916CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -130,6 +138,15 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		CC4400D4222F5406003255BE /* Modals */ = {
+			isa = PBXGroup;
+			children = (
+				CC4400D5222F5425003255BE /* NewChannelViewController.swift */,
+				CC4400D6222F5425003255BE /* NewChannelViewController.xib */,
+			);
+			path = Modals;
+			sourceTree = "<group>";
+		};
 		CC4E04B7221E2468008916CE = {
 			isa = PBXGroup;
 			children = (
@@ -155,6 +172,7 @@
 		CC4E04C2221E2468008916CE /* ChatLab */ = {
 			isa = PBXGroup;
 			children = (
+				CC4400D9222F7018003255BE /* GoogleService-Info.plist */,
 				CC4E04C3221E2468008916CE /* AppDelegate.swift */,
 				CC52810F221F2B9300A3A595 /* Support */,
 				CC4E04FA221E5BD8008916CE /* Dependencies */,
@@ -188,6 +206,7 @@
 		CC4E04F1221E53BC008916CE /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				CC4400D4222F5406003255BE /* Modals */,
 				CC528112221F545500A3A595 /* HomeViewController.swift */,
 				CC528116221F716600A3A595 /* ChannelListViewController.swift */,
 			);
@@ -281,6 +300,7 @@
 			isa = PBXGroup;
 			children = (
 				CC4E0503221E5E18008916CE /* TwilioClient.swift */,
+				CC4400D2222F0D6E003255BE /* GoogleCloudClient.swift */,
 			);
 			path = ThirdPartyServices;
 			sourceTree = "<group>";
@@ -413,7 +433,9 @@
 			files = (
 				CC4E04CE221E246A008916CE /* LaunchScreen.storyboard in Resources */,
 				CC4E04CB221E246A008916CE /* Assets.xcassets in Resources */,
+				CC4400DA222F7018003255BE /* GoogleService-Info.plist in Resources */,
 				CC4E04C9221E2468008916CE /* Main.storyboard in Resources */,
+				CC4400D8222F5425003255BE /* NewChannelViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -467,13 +489,18 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-ChatLab/Pods-ChatLab-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/PKHUD/PKHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftMessages/SwiftMessages.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/Swinject/Swinject.framework",
 				"${BUILT_PRODUCTS_DIR}/SwinjectStoryboard/SwinjectStoryboard.framework",
 				"${PODS_ROOT}/TwilioChatClient/TwilioChatClient.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
@@ -481,13 +508,18 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PKHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxDataSources.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftMessages.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Swinject.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwinjectStoryboard.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwilioChatClient.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -550,12 +582,14 @@
 				CCF42962222080B9007D7974 /* TwilioChatStructs.swift in Sources */,
 				CC4E04FD221E5C32008916CE /* DependencyRegistry.swift in Sources */,
 				CC528115221F585F00A3A595 /* HomePresenter.swift in Sources */,
+				CC4400D7222F5425003255BE /* NewChannelViewController.swift in Sources */,
 				CC4E0501221E5CC0008916CE /* ModelLayer.swift in Sources */,
 				CC4E0504221E5E18008916CE /* TwilioClient.swift in Sources */,
 				CC528111221F2BC400A3A595 /* Constants.swift in Sources */,
 				CC528117221F716600A3A595 /* ChannelListViewController.swift in Sources */,
 				CC52811B221F734300A3A595 /* DataLayer.swift in Sources */,
 				CC4E04FF221E5C65008916CE /* SwinjectStoryboard+Extensions.swift in Sources */,
+				CC4400D3222F0D6E003255BE /* GoogleCloudClient.swift in Sources */,
 				CC528113221F545500A3A595 /* HomeViewController.swift in Sources */,
 				CC4E04F9221E5A7B008916CE /* RootNavigationCoordinator.swift in Sources */,
 				CC4E0507221E6575008916CE /* TransitionLayer.swift in Sources */,

@@ -7,27 +7,49 @@
 //
 
 import UIKit
-
+import PKHUD
 class HomeViewController: UIViewController {
+    
     weak var navigationCoordinator: NavigationCoordinatorProtocol?
     fileprivate var presenter: HomePresenterProtocol!
+    
+    @IBOutlet weak var txtEmail: UITextField!
+    
+    @IBOutlet weak var txtPassword: UITextField!
+    
+    @IBOutlet weak var btnSignup: UIButton!
+    
+    @IBOutlet weak var btnLogin: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
     }
     
     func configure(with presenter:HomePresenterProtocol,
-                   navigationCoordinator: NavigationCoordinatorProtocol){
+                   navigationCoordinator: NavigationCoordinatorProtocol) {
         print("HomeViewController configure")
         self.navigationCoordinator = navigationCoordinator
         self.presenter = presenter
     }
     
     
-    @IBAction func doGuestAccess(_ sender: Any) {
-        presenter.requestAccessAsGuest { [weak self] (result) in            
-            guard result == .success else { return }
-            self?.navigationCoordinator?.next(arguments: [:])
-        }
+    @IBAction func doSingup(_ sender: Any) {
         
+    }
+    
+    @IBAction func doLogin(_ sender: Any) {
+        
+    }
+    
+    @IBAction func doGuestAccess(_ sender: Any) {
+        navigationCoordinator?.showLoadingHUD()
+        presenter.requestAccessAsGuest { [weak self] (success, error) in
+            self?.navigationCoordinator?.hideHUD()
+            if success == true {
+                self?.navigationCoordinator?.next(arguments: [:])
+            } else {
+                self?.navigationCoordinator?.showMessage(type: .error, message: "Not able to login")
+            }
+        }
     }
 }

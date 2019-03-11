@@ -11,15 +11,23 @@ import Alamofire
 
 protocol AlamofirePortable {
     func testRequest(completion: @escaping BlockNetworkResponse)
-    func responseValidation(response: DataResponse<Any>)-> NetworkLayerError?
+    func responseValidation(response: DataResponse<Any>)-> CustomError?
 }
 struct AlamofirePort: AlamofirePortable {
     
     func testRequest(completion: @escaping BlockNetworkResponse)  {
         Alamofire.request("https://httpbin.org/get").responseJSON { response in
             
-            guard let statusCode = response.response?.statusCode else {completion(nil, .badRequest); return}
-            guard statusCode == 200 else {completion(nil, .httpError(code: statusCode)) ; return}
+            guard let statusCode = response.response?.statusCode else {
+                let error = CustomError(userMessage: "Error from httpbin.org", layer: .networkLayer, code: 0)
+                completion(nil, error)
+                return
+            }
+            guard statusCode == 200 else {
+                let error = CustomError(userMessage: "Error from httpbin.org", layer: .networkLayer, code: statusCode)
+                completion(nil,error)
+                return
+            }
             
             print("Request: \(String(describing: response.request))")   // original url request
             print("Response: \(String(describing: response.response))") // http url response
@@ -39,7 +47,12 @@ struct AlamofirePort: AlamofirePortable {
     
     func twilioRequest(service:String, methodType: Alamofire.HTTPMethod, params:[String:Any]?, completion: @escaping BlockNetworkResponse) {
         
-        guard let url = URL(string: service) else {completion(nil, .badRequest); return}
+        guard let url = URL(string: service) else {
+            let error = CustomError(userMessage: "There's something wrong with the URL format",
+                                    layer: .networkLayer, code: 0)
+            completion(nil, error);
+            return
+        }
         
         Alamofire.request(url, method: methodType, parameters: params, encoding: URLEncoding.default, headers: nil)
                  .responseJSON { (response) in
@@ -47,16 +60,26 @@ struct AlamofirePort: AlamofirePortable {
                     if let error = self.responseValidation(response: response) {
                         completion(nil, error); return
                     }
-                    
                     if let jsonValue = response.result.value {
                         completion(jsonValue, nil)
                     }
         }
     }
     
-    func responseValidation(response: DataResponse<Any>)-> NetworkLayerError? {
-        guard let statusCode = response.response?.statusCode else { return (.badRequest)}
-        guard statusCode == 200 else {return .httpError(code: statusCode)}
+    func responseValidation(response: DataResponse<Any>)-> CustomError? {
+        guard let statusCode = response.response?.statusCode else {
+            let error = CustomError(userMessage:"Bad network request",
+                                    layer:.networkLayer,
+                                    code: 0)
+            return error
+            
+        }
+        guard statusCode == 200 else {
+            let error = CustomError(userMessage:"Error from Http request. Code: \(statusCode)",
+                                    layer:.networkLayer,
+                                    code: statusCode)
+            return error
+        }
         return nil
     }
 }

@@ -6,11 +6,9 @@
 //  Copyright © 2019 Nestor Hernandez. All rights reserved.
 //
 
-import UIKit
-
-
 protocol HomePresenterProtocol {
-    func requestAccessAsGuest(result: @escaping BlockAsyncBooleanResult)
+    //*********  Inputs  ********* //
+    func requestAccessAsGuest(completion: @escaping BlockBooleanResponse)
 }
 
 class HomePresenter: HomePresenterProtocol {
@@ -27,7 +25,9 @@ class HomePresenter: HomePresenterProtocol {
 
 //MARK:- Login Functions
 extension HomePresenter {
-    func requestAccessAsGuest(result: @escaping BlockAsyncBooleanResult){        
-        modelLayer.doTwilioLogin(with: "Ness")
+    func requestAccessAsGuest(completion: @escaping BlockBooleanResponse){
+        modelLayer.doTwilioLogin(with: "Ness", completion: {(result, error) in
+            completion(result, error)
+        })
     }
 }

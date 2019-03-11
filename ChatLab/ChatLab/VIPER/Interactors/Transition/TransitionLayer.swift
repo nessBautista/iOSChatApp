@@ -11,9 +11,19 @@
  It will Help the communication between layers
  */
 import UIKit
+import TwilioChatClient
+
 protocol TransitionLayerProtocol {
     
+    //Twilio Transitions
+    func getTwilioChannelStruct(channel: TCHChannel)-> TwilioChannel
 }
-struct TransitionLayer:  TransitionLayerProtocol {
 
+class TransitionLayer:  TransitionLayerProtocol {
+    func getTwilioChannelStruct(channel: TCHChannel) -> TwilioChannel {
+        let twChannel = TwilioChannel(channelName: channel.friendlyName ?? String(),
+                                      dateCreated: channel.dateCreated ?? String())
+        return twChannel
+    }
+    
 }

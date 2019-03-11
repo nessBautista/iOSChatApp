@@ -29,5 +29,11 @@ struct TwilioLoginInfo {
 }
 
 struct TwilioChannel {
-    var channelName: String 
+    var channelName: String
+    var dateCreated: String
+    
+    init(channelName: String, dateCreated:String){
+        self.channelName = channelName
+        self.dateCreated = dateCreated
+    }
 }

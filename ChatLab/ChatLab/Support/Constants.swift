@@ -17,6 +17,10 @@ enum NavigationState {
          chat
 }
 
+enum ModalType {
+    case newChannel
+}
+
 enum RegistrationState {
     case success,
          error
@@ -24,12 +28,12 @@ enum RegistrationState {
 
 //MARK:- Network layer
 
-typealias BlockAsyncBooleanResult = (AsycnResult)->()
 
-typealias BlockNetworkResponse = (_ response:Any?, _ error: NetworkLayerError?)->()
-typealias BlockStringResponse = (_ response:String?, _ error: NetworkLayerError?)->()
-typealias BlockJsonResponse = (_ jsonData: JSON?, _ error: NetworkLayerError?)->()
-typealias BlockBooleanResponse = (_ response: Bool?, _ error: NetworkLayerError?)->()
+
+typealias BlockNetworkResponse = (_ response:Any?, _ error: CustomError?)->()
+typealias BlockStringResponse = (_ response:String?, _ error: CustomError?)->()
+typealias BlockJsonResponse = (_ jsonData: JSON?, _ error: CustomError?)->()
+typealias BlockBooleanResponse = (_ response: Bool?, _ error: CustomError?)->()
 //typealias BlockTwilioChannelResponse = (_ channel: TCHChannel?, )
 
 
@@ -42,6 +46,23 @@ enum NetworkLayerError: Error {
     case canceledRequest
     case httpError(code: Int)
     case badRequest
+}
+
+enum AppLayer: Int {
+    case modelLayer
+    case networkLayer
+    case transferLayer
+}
+
+struct CustomError: Error {
+    var userMessage: String
+    var layer: AppLayer
+    var code: Int
+    init(userMessage: String, layer: AppLayer, code: Int){
+        self.userMessage = userMessage
+        self.layer = layer
+        self.code = code
+    }
 }
 
 struct Constants {

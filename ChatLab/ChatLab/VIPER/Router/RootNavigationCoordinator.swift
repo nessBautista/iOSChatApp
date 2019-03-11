@@ -7,10 +7,16 @@
 //
 
 import UIKit
+import PKHUD
 
 protocol NavigationCoordinatorProtocol: class {
     func next(arguments: Dictionary<String, Any>?)
+    func presentModalController(arguments: Dictionary<String, Any>?)
     func movingBack()
+    func showLoadingHUD()
+    func hideHUD()
+    func showMessage(type: MessageType, message: String)
+    
 }
 
 class NavigationCoordinator: NavigationCoordinatorProtocol {
@@ -18,6 +24,7 @@ class NavigationCoordinator: NavigationCoordinatorProtocol {
     var registry: DependencyRegistryProtocol
     var rootViewController: UIViewController
     var navState: NavigationState = .home
+    private var hud: PKHUD = PKHUD.sharedHUD
     
     init(with rootViewController: UIViewController, registry: DependencyRegistry) {
         self.rootViewController = rootViewController
@@ -37,16 +44,54 @@ class NavigationCoordinator: NavigationCoordinatorProtocol {
     }
     
     func movingBack() {
-        
+        switch navState {
+        case .home:
+            break
+            
+        case .channelList:
+            navState = .home
+        case .chat:
+            break
+        }
     }
     
     func showChannelList(arguments: Dictionary<String, Any>?) {
-        //guard let spy = arguments?["spy"] as? SpyDTO else { notifyNilArguments(); return }
         
-//        let channelListVC = registry.makeDetailViewController(with: spy)
-//
-//        rootViewController.navigationController?.pushViewController(detailViewController, animated: true)
-//        navState = .atSpyDetails
+        let channelListVC = registry.makeChannelListController()
+        rootViewController.navigationController?.pushViewController(channelListVC, animated: true)
+        navState = .channelList
     }
     
+    func presentModalController(arguments: Dictionary<String, Any>?) {
+        if let modalType = arguments?["type"] as? ModalType {
+            switch modalType {
+            case .newChannel:
+                let vcNewChannel = registry.makeNewChannelViewController()                
+                rootViewController.navigationController?.present(vcNewChannel, animated: true, completion: nil)
+                break
+            
+            }
+        }
+    }
+    
+    func showLoadingHUD(){
+        self.hud.contentView = PKHUDProgressView()
+        self.hud.show()
+    }
+    
+    func hideHUD(){
+        self.hud.hide()
+    }
+}
+
+enum MessageType {
+    case success
+    case warning
+    case error
+}
+
+extension NavigationCoordinator {
+    func showMessage(type: MessageType, message: String) {
+        
+    }
 }

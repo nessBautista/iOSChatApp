@@ -14,6 +14,7 @@
 import UIKit
 import TwilioChatClient
 import SwiftyJSON
+import RxCocoa
 
 
 
@@ -21,13 +22,18 @@ import SwiftyJSON
 protocol TwilioClientProtocol {
     
     //*********  SDK chat client ********* //
-    var client: TwilioChatClient? {get set}
-    var generalChannel: TCHChannel? {get set}
-    var messages: [TCHMessage]  {get set}
-    var channelList:TCHChannels? {get set}
+    //var client: TwilioChatClient? {get set}
+    //var generalChannel: TCHChannel? {get set}
+    //var messages: [TCHMessage]  {get set}
     
+    
+    //*********  Inputs  ********* //
     func getToken(tokenRequest: TwilioLoginInfo, completion: @escaping BlockStringResponse)
     func startChatClient(token: String, completion: @escaping BlockBooleanResponse)
+    
+    //*********  Outputs  ********* //
+    var rxChannelList: BehaviorRelay<[TCHChannel]> {get set}
+    
     
     //********* TWILIO REST API  ********* //
     //--- CHANNELS
@@ -61,27 +67,18 @@ protocol TwilioClientProtocol {
 
 //MARK:- TwilioClient REST API Implementation
 class TwilioClient: NSObject, TwilioClientProtocol {
+    fileprivate var client: TwilioChatClient?
     
-    var generalChannel: TCHChannel?
-    var messages: [TCHMessage]
-    var client: TwilioChatClient?
-    var channelList: TCHChannels? {
-        didSet{
-            let channels = channelList?.subscribedChannels().map({TwilioChannel(channelName: $0.friendlyName ?? String())})
-            onChannelListUpdated?(channels ?? [])
-        }
-    }
+    //Protocol Variables
+    var rxChannelList = BehaviorRelay<[TCHChannel]>(value: [])
     
-    var onChannelListUpdated:((_ channels: [TwilioChannel])->())?
     deinit {
         print("TwilioClient deinit")
     }
+    
     override init() {
         print("TwilioClient initialization")
-        self.onChannelListUpdated = nil
         self.client = nil
-        self.generalChannel = nil
-        self.messages = []
     }
 }
 
@@ -109,8 +106,10 @@ extension TwilioClient: TwilioChatClientDelegate {
                 self.client = chatClient;
                 print("Logged in")
                 completion(true, nil)
-            }
-            completion(false, .badRequest)
+            } else {
+                let customError = CustomError(userMessage: "Error while starting twilio client", layer: .networkLayer, code: result.error?.code ?? 0)
+                completion(false, customError)
+            }            
         }
     }
     
@@ -118,7 +117,7 @@ extension TwilioClient: TwilioChatClientDelegate {
     func chatClient(_ client: TwilioChatClient, synchronizationStatusUpdated status: TCHClientSynchronizationStatus) {
         if status == .completed {
             if let channelList = self.client?.channelsList(){
-                self.channelList = channelList
+                self.rxChannelList.accept(channelList.subscribedChannels())
             }
         }
         if status == .channelsListCompleted {
@@ -133,7 +132,8 @@ extension TwilioClient: TwilioChatClientDelegate {
     func onChannelListAvailable(channelList: TCHChannels){
         
     }
-    //CHd4baaf4a12a841d2a6a1e3e561acc5c8
+    
+    
     //MARK:- Utilities
     func joinChannel(_ channelUniqueName: String){
         

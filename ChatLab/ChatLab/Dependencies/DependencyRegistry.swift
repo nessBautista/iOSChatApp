@@ -16,7 +16,12 @@ protocol DependencyRegistryProtocol {
     
     typealias rootNavigationCoordinatorMaker = (UIViewController) -> NavigationCoordinatorProtocol
     func makeRootNavigationCoordinator(rootViewController: UIViewController) -> NavigationCoordinatorProtocol
-//
+    
+    typealias ChannelListMaker = () -> ChannelListViewController
+    func makeChannelListController() -> ChannelListViewController
+
+    typealias NewChannelViewControllerMaker = () -> NewChannelViewController
+    func makeNewChannelViewController()-> NewChannelViewController
 //    typealias SpyCellMaker = (UITableView, IndexPath, SpyDTO) -> SpyCell
 //    func makeSpyCell(for tableView: UITableView, at indexPath: IndexPath, with spy: SpyDTO) -> SpyCell
 //
@@ -35,6 +40,7 @@ class DependencyRegistry: DependencyRegistryProtocol {
         self.container = container
         self.registerDependencies()
         self.registerPresenters()
+        self.registerViewControllers()
     }
 
     
@@ -54,25 +60,47 @@ class DependencyRegistry: DependencyRegistryProtocol {
         //Data Layer
         container.register(DataLayerProtocol.self){_ in DataLayer()}.inObjectScope(.container)
         
+        //Transition Layer
+        container.register(TransitionLayerProtocol.self) {_ in TransitionLayer()}.inObjectScope(.container)
         
         //-- INTERACTOR
-        container.register(ModelLayerProtocol.self) {r in
-            ModelLayer(networkLayer: r.resolve(NetworkLayerProtocol.self)!)
+        container.register(ModelLayerProtocol.self) { r in
+            ModelLayer(networkLayer: r.resolve(NetworkLayerProtocol.self)!,
+                       transitionLayer: r.resolve(TransitionLayerProtocol.self)!)
         }.inObjectScope(.container)
     }
     
     func registerPresenters() {
         container.register(HomePresenterProtocol.self) { r in HomePresenter(modelLayer:r.resolve(ModelLayerProtocol.self)!)}
+        container.register(ChannelListPresenterProtocol.self) { r in ChannelListPresenter(modelLayer: r.resolve(ModelLayerProtocol.self)!)}
         
     }
     
     func registerViewControllers() {
+        container.register(ChannelListViewController.self) { (r) in
+            let presenter = r.resolve(ChannelListPresenterProtocol.self)!
+            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ChannelListViewController") as! ChannelListViewController
+            vc.configure(with: presenter, navigationCoordinator: self.navigationCoordinator)
+            return vc
+        }
         
+        container.register(NewChannelViewController.self) { r in
+            
+            return NewChannelViewController(with: self.navigationCoordinator)
+        }
     }
     
     //MARK: - Maker Methods
     func makeRootNavigationCoordinator(rootViewController: UIViewController) -> NavigationCoordinatorProtocol {
         navigationCoordinator = container.resolve(NavigationCoordinatorProtocol.self, argument: rootViewController)!
         return navigationCoordinator
+    }
+    
+    func makeChannelListController() -> ChannelListViewController {
+        return container.resolve(ChannelListViewController.self)!
+    }
+    
+    func makeNewChannelViewController()-> NewChannelViewController {
+        return container.resolve(NewChannelViewController.self)!
     }
 }
