@@ -1,0 +1,42 @@
+In order to avoid compatibility issues between fastlane versions, 
+a Gemfile can be added to the root folder of the project (same deep as podfile).
+This Gemfile should contain the fastlane version and its dependencies.
+This will help the team to maintain the project in a conflict-free status 
+Any new member on boarding can just refer to the github repository to get the correct fastlane version.
+
+For details, go the "Use a Gemfile" section:
+
+https://docs.fastlane.tools/getting-started/ios/setup/
+
+Now, before this to work you need to install the bundler:
+https://bundler.io
+
+This works as an environment manager (Like the virtualenv for python)
+So you can have a list of different environments for your ruby projects.
+In this case we are using one environment for our specific fastlane version.
+To install just  just run:
+$ gem install bundler
+
+Also you may needed to export the  your .zshrc (or your prefered console)
+export PATH=$PATH:"/usr/local/lib/ruby/gems/2.5.0/bin"
+
+To know what is the path you can run:
+.zshrc
+
+$ gem environment
+output:
+ - RUBYGEMS VERSION: 2.7.7
+  - RUBY VERSION: ...
+  - INSTALLATION DIRECTORY: ...
+  - USER INSTALLATION DIRECTORY: ...
+  - RUBY EXECUTABLE: ...
+  - EXECUTABLE DIRECTORY: /usr/local/lib/ruby/gems/2.5.0/bin    <<------EXPORT THIS ONE
+  - SPEC CACHE DIRECTORY: ...
+  - SYSTEM CONFIGURATION DIRECTORY:...
+
+
+  Everytime you need to run fastlane, you will also need to run the bundler commands:
+  bundle exec fastlane [lane]
+
+  ////////////// CERTIFICATES //////////////
+  the most basic cert would be the CST
