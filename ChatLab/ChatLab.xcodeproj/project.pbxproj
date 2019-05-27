@@ -375,13 +375,16 @@
 				TargetAttributes = {
 					CC4E04BF221E2468008916CE = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
 					};
 					CC4E04D3221E246A008916CE = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
 						TestTargetID = CC4E04BF221E2468008916CE;
 					};
 					CC4E04DE221E246A008916CE = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
 						TestTargetID = CC4E04BF221E2468008916CE;
 					};
 				};
@@ -745,7 +748,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.AppLab.ChatLab;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -764,7 +767,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.AppLab.ChatLab;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -785,7 +788,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = AppLab.ChatLabTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ChatLab.app/ChatLab";
 			};
@@ -807,7 +810,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = AppLab.ChatLabTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ChatLab.app/ChatLab";
 			};
@@ -828,7 +831,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = AppLab.ChatLabUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = ChatLab;
 			};
@@ -849,7 +852,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = AppLab.ChatLabUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = ChatLab;
 			};
